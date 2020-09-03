@@ -12,31 +12,46 @@ function Head(editor) {
 
     // 当前是否 active 状态
     this._active = false
-
+    let _this = this;
     // 初始化 droplist
-    this.droplist = new DropList(this, {
-        width: 100,
-        $title: $('<p>设置标题</p>'),
-        type: 'list', // droplist 以列表形式展示
-        list: [
-            { $elem: $('<h1>H1</h1>'), value: '<h1>' },
-            { $elem: $('<h2>H2</h2>'), value: '<h2>' },
-            { $elem: $('<h3>H3</h3>'), value: '<h3>' },
-            { $elem: $('<h4>H4</h4>'), value: '<h4>' },
-            { $elem: $('<h5>H5</h5>'), value: '<h5>' },
-            { $elem: $('<p>正文</p>'), value: '<p>' }
-        ],
-        onClick: (value) => {
-            // 注意 this 是指向当前的 Head 对象
-            this._command(value)
+    // this.droplist = new DropList(this, {
+    //     width: 100,
+    //     $title: $('<p>设置标题</p>'),
+    //     type: 'list', // droplist 以列表形式展示
+    //     list: [
+    //         { $elem: $('<h1>H1</h1>'), value: '<h1>' },
+    //         { $elem: $('<h2>H2</h2>'), value: '<h2>' },
+    //         { $elem: $('<h3>H3</h3>'), value: '<h3>' },
+    //         { $elem: $('<h4>H4</h4>'), value: '<h4>' },
+    //         { $elem: $('<h5>H5</h5>'), value: '<h5>' },
+    //         { $elem: $('<p>正文</p>'), value: '<p>' }
+    //     ],
+    //     onClick: (value) => {
+    //         // 注意 this 是指向当前的 Head 对象
+    //         this._command(value)
+    //     }
+    // })
+
+    this.$elem.on('click', function (e) {
+        // _this.onClick('<h1>');
+        console.log(_this.isH)
+        if(!_this.isH){
+            _this._command('<h1>');
+            _this.isH = true
+        }else{
+            _this._command('<p>');
+            _this.isH = false
         }
-    })
+
+
+    });
+
 }
 
 // 原型
 Head.prototype = {
     constructor: Head,
-
+    isH:false,
     // 执行命令
     _command: function (value) {
         const editor = this.editor
