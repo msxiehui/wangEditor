@@ -15,8 +15,11 @@
 <body>
     <div class="body">
 
+        <div id="menu">
+        </div>
+
         <div id="div1">
-            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+
         </div>
     </div>
 
@@ -24,7 +27,13 @@
     <script type="text/javascript" src="/wangEditor.js"></script>
     <script type="text/javascript">
         var E = window.wangEditor
-        var editor = new E('#div1')
+        var editor = new E('#menu','#div1')
+        editor.customConfig.menus = [
+            'head',
+            'bold',
+            'italic',
+            'underline'
+        ]
         editor.create()
     </script>
 </body>
